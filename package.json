@@ -7,10 +7,12 @@
     "test": "./node_modules/.bin/mocha ./test/**/*.spec.js --recursive --reporter spec"
   },
   "dependencies": {
+    "chai": "^4.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "mocha": "^7.0.1",
     "mongoose": "^5.8.11",
     "morgan": "~1.9.1"
   }
