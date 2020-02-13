@@ -1,7 +1,8 @@
 const awilix = require("awilix");
 const UserService = require("../services/UserService");
 const UserRepository = require("../repository/UserRepository");
-const Logger = require("./logger");
+const EncryptionService = require("../services/EncryptionService");
+const AuthService = require("../services/AuthService");
 
 const container = awilix.createContainer({
   injectionMode: awilix.InjectionMode.PROXY
@@ -9,7 +10,9 @@ const container = awilix.createContainer({
 
 container.register({
   userService: awilix.asClass(UserService),
-  userRepository: awilix.asClass(UserRepository)
+  userRepository: awilix.asClass(UserRepository),
+  authService: awilix.asClass(AuthService),
+  encryptionService: awilix.asClass(EncryptionService)
 });
 
 module.exports = container;
