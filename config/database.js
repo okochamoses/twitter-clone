@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const logger = require("./logger");
 const {
   dbHost,
   dbName,
@@ -10,13 +11,14 @@ const {
 const url = `mongodb://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}`;
 
 const options = {
-    useUnifiedTopology: true,
-    useNewUrlParser: true
-}
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true
+};
 
 module.exports = mongoose
   .connect(url, options)
   .then(() => {
-    console.log("Database Connection Established");
+    logger.info("Database Connection Established");
   })
-  .catch(err => console.log(err));
+  .catch(err => logger.error(err));
