@@ -13,7 +13,8 @@ const url = `mongodb://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}`;
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useFindAndModify: false
 };
 
 module.exports = mongoose

@@ -10,7 +10,7 @@ class UserRepository extends MongooseRepository {
     const user = await this.collection
       .findOne({ _id: userId })
       .lean()
-      .select("username followers")
+      .select("username followers fullName")
       .populate("followers", "_id username fullName")
       .exec();
     return user;

@@ -9,6 +9,7 @@ require("./config/passport");
 
 const userRouter = require("./routes/userRoutes");
 const authRouter = require("./routes/authRoutes");
+const tweetRouter = require("./routes/tweetRoutes");
 const authMiddleware = passport.authenticate("jwt", { session: false });
 
 const app = express();
@@ -21,5 +22,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/users/", authMiddleware, userRouter);
 app.use("/api/auth/", authRouter);
+app.use("/api/tweets/", authMiddleware, tweetRouter);
 
 module.exports = app;

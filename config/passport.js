@@ -20,9 +20,10 @@ passport.use(
         { multiple: false }
       );
       if (user) {
+        const userPayload = { id: user._id, username: user.username };
         return done(null, user);
       } else {
-        return done(null, false, { message: "wahala" });
+        return done(null, false);
       }
     } catch (e) {
       console.log(e);
