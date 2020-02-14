@@ -1,5 +1,6 @@
 const logger = require("../config/logger");
 const ServiceResponse = require("./responses/ServiceResponse");
+const { jwtSecret, jwtTimeout } = require("../config/configurationKeys");
 const { code, message } = require("./responses/ResponseObjects");
 
 class AuthService {
@@ -86,6 +87,43 @@ class AuthService {
     }
 
     return new ServiceResponse(code.SUCCESS);
+  }
+
+  async login(loginId, password) {
+    try {
+      const user = await this.userRepository.find(
+        { username: loginId },
+        { multiple: false }
+      );
+      if (user === null) {
+        return new ServiceResponse(
+          code.AUTH_FAILURE,
+          "The username and password you entered did not match our records. Please double-check and try again."
+        );
+      }
+
+      const isValid = await this.encryptionService.compareHash(
+        password,
+        user.password
+      );
+
+      if (isValid) {
+        const signedToken = this.encryptionService.signToken(
+          { id: user.id, username: user.username },
+          jwtSecret,
+          { expiresIn: jwtTimeout }
+        );
+        return new ServiceResponse(code.SUCCESS, message.SUCCESS, signedToken);
+      } else {
+        return new ServiceResponse(
+          code.AUTH_FAILURE,
+          "The username and password you entered did not match our records. Please double-check and try again."
+        );
+      }
+    } catch (e) {
+      logger.error(`Error registering user: ${e.message}`);
+      return new ServiceResponse(code.FAILURE, message.FAILURE);
+    }
   }
 }
 
