@@ -93,6 +93,19 @@ class TweetService {
       return null;
     }
   }
+
+  async search(searchValue) {
+    // search users
+    try {
+      const users = await this.tweetRepository.search(searchValue);
+      return new ServiceResponse(code.SUCCESS, responseMessage.SUCCESS, users);
+    } catch (e) {
+      logger.info(
+        `Error searching tweet search string with value of ${searchValue}: ${e.message}`
+      );
+      return new ServiceResponse(code.FAILURE, responseMessage.FAILURE);
+    }
+  }
 }
 
 module.exports = TweetService;

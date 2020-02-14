@@ -19,4 +19,9 @@ router.post("/follow/:userToFollowId", async (req, res, next) => {
   res.json(await userService.follow({ userToFollowId, userId }));
 });
 
+router.post("/search", async (req, res, next) => {
+  const { searchValue } = req.body;
+  res.json(await userService.search(searchValue));
+});
+
 module.exports = router;

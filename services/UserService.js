@@ -79,6 +79,19 @@ class UserService {
       return new ServiceResponse(code.FAILURE, message.FAILURE);
     }
   }
+
+  async search(searchValue) {
+    // search users
+    try {
+      const users = await this.userRepository.search(searchValue);
+      return new ServiceResponse(code.SUCCESS, message.SUCCESS, users);
+    } catch (e) {
+      logger.info(
+        `Error searching username search string with value of ${searchValue}: ${e.message}`
+      );
+      return new ServiceResponse(code.FAILURE, message.FAILURE);
+    }
+  }
 }
 
 module.exports = UserService;

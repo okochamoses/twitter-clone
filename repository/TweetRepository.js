@@ -25,6 +25,16 @@ class TweetRepository extends MongooseRepository {
       console.log(e);
     }
   }
+
+  async search(value) {
+    const users = await this.collection
+      .find({ message: new RegExp(value, "i") })
+      .lean()
+      .sort({ createdAt: "desc" })
+      .select("userId message _id createdAt")
+      .exec();
+    return users;
+  }
 }
 
 module.exports = TweetRepository;

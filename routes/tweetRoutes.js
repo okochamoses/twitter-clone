@@ -18,4 +18,9 @@ router.post("/:tweetId/replies", async (req, res) => {
   return res.json(await tweetService.replyTweet(tweetId, message, id));
 });
 
+router.post("/search", async (req, res, next) => {
+  const { searchValue } = req.body;
+  res.json(await tweetService.search(searchValue));
+});
+
 module.exports = router;

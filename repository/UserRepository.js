@@ -25,6 +25,15 @@ class UserRepository extends MongooseRepository {
       .exec();
     return user;
   }
+
+  async search(value) {
+    const users = await this.collection
+      .find({ username: new RegExp(value, "i") })
+      .lean()
+      .select("username fullname _id")
+      .exec();
+    return users;
+  }
 }
 
 module.exports = UserRepository;
