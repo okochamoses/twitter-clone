@@ -20,12 +20,25 @@ class UserService {
     }
   }
 
-  async find(limit, offset) {
+  async getAllUsers() {
     try {
-      const users = await this.userRepository.find({}, { lean: false });
+      const users = await this.userRepository.find({});
       return new ServiceResponse(code.SUCCESS, message.SUCCESS, users);
-    } catch (error) {
+    } catch (e) {
       logger.info(`Error fetching users: ${e.message}`);
+      return new ServiceResponse(code.FAILURE, message.FAILURE);
+    }
+  }
+
+  async getUser({ userId }) {
+    try {
+      const user = await this.userRepository.getUser({ userId });
+      if (user === null) {
+        return new ServiceResponse(code.FAILURE, "User not found");
+      }
+      return new ServiceResponse(code.SUCCESS, message.SUCCESS, user);
+    } catch (e) {
+      logger.info(`Error fetching user with ID of ${userId}: ${e.message}`);
       return new ServiceResponse(code.FAILURE, message.FAILURE);
     }
   }

@@ -34,6 +34,17 @@ class UserRepository extends MongooseRepository {
       .exec();
     return users;
   }
+
+  async getUser({ userId }) {
+    const user = await this.collection
+      .findById(userId)
+      .lean()
+      .select("username fullName email following followers")
+      .populate("following", "username fullName")
+      .populate("followers", "username fullName")
+      .exec();
+    return user;
+  }
 }
 
 module.exports = UserRepository;

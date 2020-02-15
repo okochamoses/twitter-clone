@@ -1,0 +1,1631 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Twitter Clone",
+    "description": "To get started, login to the application to get a JWT token. The token is automatically populated in the required routes.\n\nNOTE: Token has a default expiry time of 1 hour",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://example.com",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Register",
+        "description": "Register a user onto the platform",
+        "operationId": "Register",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              },
+              "example": {
+                "username": "blessing",
+                "phoneNumber": "07011111111",
+                "email": "bless@gmail.com",
+                "password": "Password12",
+                "fullName": "Blessing Ayala"
+              }
+            }
+          },
+          "required": true,
+          "x-send-file-in-body": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {
+              "X-Powered-By": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Express"
+                  }
+                }
+              },
+              "Content-Length": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "46"
+                  }
+                }
+              },
+              "ETag": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "W/\"2e-Ud49v5azqMFMmHzfm7cVEryFxWg\""
+                  }
+                }
+              },
+              "Date": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Sat, 15 Feb 2020 05:33:11 GMT"
+                  }
+                }
+              },
+              "Connection": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "keep-alive"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Registeralreadyexixtingusername"
+                },
+                "example": {
+                  "code": 10,
+                  "message": "Username already taken"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Login",
+        "description": "Login with username and password to generate a jwt token that can be passed in Authorisation header for other endpoints as Bearer token",
+        "operationId": "Login",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              },
+              "example": {
+                "loginId": "daniel",
+                "password": "Password12"
+              }
+            }
+          },
+          "required": true,
+          "x-send-file-in-body": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {
+              "X-Powered-By": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Express"
+                  }
+                }
+              },
+              "Content-Length": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "250"
+                  }
+                }
+              },
+              "ETag": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "W/\"fa-1qIl6P6/Z1c1GKrDFYdbC1Qnq+E\""
+                  }
+                }
+              },
+              "Date": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Sat, 15 Feb 2020 05:35:47 GMT"
+                  }
+                }
+              },
+              "Connection": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "keep-alive"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Loginsuccess"
+                },
+                "example": {
+                  "code": 0,
+                  "message": "Operation Successful",
+                  "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlNDViOGQ1MDRmZjNkNzE4YTdhYTFkZCIsInVzZXJuYW1lIjoiZGFuaWVsIiwiaWF0IjoxNTgxNzQ0OTQ3LCJleHAiOjE1ODE3NDUyNDd9.2PvNqHpMawKbSmnlOeCHirVM22j7QrU3z75OGuaOZac"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/5e45b8d504ff3d718a7aa1dd": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get User by ID",
+        "operationId": "GetUserbyID",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {
+              "X-Powered-By": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Express"
+                  }
+                }
+              },
+              "Content-Length": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "441"
+                  }
+                }
+              },
+              "ETag": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "W/\"1b9-5rAF9uELqaAwurJTkmT/Yf5Ckf0\""
+                  }
+                }
+              },
+              "Date": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Sat, 15 Feb 2020 08:14:38 GMT"
+                  }
+                }
+              },
+              "Connection": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "keep-alive"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserbyID"
+                },
+                "example": {
+                  "code": 0,
+                  "message": "Operation Successful",
+                  "data": {
+                    "_id": "5e45b8d504ff3d718a7aa1dd",
+                    "followers": [
+                      {
+                        "_id": "5e45bc101a61c07bb1a2fa2a",
+                        "fullName": "Blessing Ayala",
+                        "username": "blessing"
+                      }
+                    ],
+                    "following": [
+                      {
+                        "_id": "5e45bc101a61c07bb1a2fa2a",
+                        "fullName": "Blessing Ayala",
+                        "username": "blessing"
+                      },
+                      {
+                        "_id": "5e45b8d504ff3d718a7aa1dd",
+                        "fullName": "Daniel Ayala",
+                        "username": "daniel"
+                      }
+                    ],
+                    "fullName": "Daniel Ayala",
+                    "username": "daniel",
+                    "email": "dandaniels@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get All Users",
+        "description": "Get all users on the platform ",
+        "operationId": "GetAllUsers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/timeline": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get Timeline",
+        "description": "Get all tweets of users logged in user is following",
+        "operationId": "GetTimeline",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {
+              "X-Powered-By": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Express"
+                  }
+                }
+              },
+              "Content-Length": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "1536"
+                  }
+                }
+              },
+              "ETag": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "W/\"600-OUQCgB5MVIXjDvypvbIWTtXGgV0\""
+                  }
+                }
+              },
+              "Date": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Sat, 15 Feb 2020 05:31:04 GMT"
+                  }
+                }
+              },
+              "Connection": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "keep-alive"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTimeline"
+                },
+                "example": {
+                  "code": 0,
+                  "message": "Operation Successful",
+                  "data": [
+                    {
+                      "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+                      "replies": [],
+                      "_id": "5e468ee1134a574946e65466",
+                      "message": "Seconds post on fake twitter",
+                      "userId": "5e45b8d504ff3d718a7aa1dd",
+                      "__v": 0
+                    },
+                    {
+                      "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+                      "replies": [],
+                      "_id": "5e468edf134a574946e65465",
+                      "message": "Seconds post on fake twitter",
+                      "userId": "5e45b8d504ff3d718a7aa1dd",
+                      "__v": 0
+                    },
+                    {
+                      "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+                      "replies": [],
+                      "_id": "5e468ecd134a574946e65464",
+                      "message": "Seconds post on fake twitter",
+                      "userId": "5e45bc101a61c07bb1a2fa2a",
+                      "__v": 0
+                    },
+                    {
+                      "createdAt": "Fri Feb 14 2020 12:11:43 GMT+0100 (West Africa Standard Time)",
+                      "replies": [],
+                      "_id": "5e4680d2b2c4f41a8d03ed12",
+                      "message": "Seconds post on fake twitter",
+                      "userId": "5e45b8d504ff3d718a7aa1dd",
+                      "__v": 0
+                    },
+                    {
+                      "createdAt": "Fri Feb 14 2020 12:11:43 GMT+0100 (West Africa Standard Time)",
+                      "replies": [],
+                      "_id": "5e4680cab2c4f41a8d03ed11",
+                      "message": "First post on fake twitter",
+                      "userId": "5e45b8d504ff3d718a7aa1dd",
+                      "__v": 0
+                    },
+                    {
+                      "createdAt": "Fri Feb 14 2020 10:23:08 GMT+0100 (West Africa Standard Time)",
+                      "replies": [],
+                      "_id": "5e466720e0b91e4bc10236c0",
+                      "message": "First reply on fake twitter",
+                      "userId": "5e45bc101a61c07bb1a2fa2a",
+                      "__v": 0
+                    },
+                    {
+                      "createdAt": "Fri Feb 14 2020 10:23:08 GMT+0100 (West Africa Standard Time)",
+                      "replies": ["5e466720e0b91e4bc10236c0"],
+                      "_id": "5e466719e0b91e4bc10236bf",
+                      "message": "First post on fake twitter",
+                      "userId": "5e45bc101a61c07bb1a2fa2a",
+                      "__v": 0
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/follow/5e45b8d504ff3d718a7aa1dd": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Follow User",
+        "description": "Add **user** to **logged in user** following list and add **logged in user** to **user** follower list",
+        "operationId": "FollowUser",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "application/json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/search": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Search By Username",
+        "description": "Search for usernames that contain searchValue string",
+        "operationId": "SearchByUsername",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchByUsernameRequest"
+              },
+              "example": {
+                "searchValue": "blessing"
+              }
+            }
+          },
+          "required": true,
+          "x-send-file-in-body": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {
+              "X-Powered-By": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Express"
+                  }
+                }
+              },
+              "Content-Length": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "488"
+                  }
+                }
+              },
+              "ETag": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "W/\"1e8-TBBR/LgvKscQyduj2fHD7uazZ3w\""
+                  }
+                }
+              },
+              "Date": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Sat, 15 Feb 2020 05:25:21 GMT"
+                  }
+                }
+              },
+              "Connection": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "keep-alive"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchByUsernamesubstring"
+                },
+                "example": {
+                  "code": 0,
+                  "message": "Operation Successful",
+                  "data": [
+                    {
+                      "_id": "5e45bc101a61c07bb1a2fa2a",
+                      "fullName": "Blessing Ayala",
+                      "username": "blessing"
+                    },
+                    {
+                      "_id": "5e45b8d504ff3d718a7aa1dd",
+                      "fullName": "Daniel Ayala",
+                      "username": "daniel"
+                    },
+                    {
+                      "_id": "5e434801ca495b1d43b65c51",
+                      "username": "moses"
+                    },
+                    {
+                      "_id": "5e42ff4446410c3fc993314b",
+                      "username": "user1"
+                    },
+                    {
+                      "_id": "5e42ff4446410c3fc993314c",
+                      "username": "user2"
+                    },
+                    {
+                      "_id": "5e42ff4446410c3fc993314d",
+                      "username": "user3"
+                    },
+                    {
+                      "_id": "5e42ff4446410c3fc993314e",
+                      "username": "user4"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/tweets": {
+      "post": {
+        "tags": ["Tweets"],
+        "summary": "Post tweet",
+        "description": "Post a tweet as logged in user",
+        "operationId": "Posttweet",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PosttweetRequest"
+              },
+              "example": {
+                "message": "First post on fake twitter"
+              }
+            }
+          },
+          "required": true,
+          "x-send-file-in-body": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {
+              "X-Powered-By": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Express"
+                  }
+                }
+              },
+              "Content-Length": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "257"
+                  }
+                }
+              },
+              "ETag": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "W/\"101-GVgLZtkkNo+JqN0DLt6J6+mFa/o\""
+                  }
+                }
+              },
+              "Date": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Fri, 14 Feb 2020 09:02:45 GMT"
+                  }
+                }
+              },
+              "Connection": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "keep-alive"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posttweetsuccessfulresponse"
+                },
+                "example": {
+                  "code": 0,
+                  "message": "Operation Successful",
+                  "data": {
+                    "createdAt": "Fri Feb 14 2020 10:01:18 GMT+0100 (West Africa Standard Time)",
+                    "replies": [],
+                    "_id": "5e466235dd6fd23a88a717d5",
+                    "message": "First post on fake twitter",
+                    "userId": "5e45bc101a61c07bb1a2fa2a",
+                    "__v": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/tweets/5e466235dd6fd23a88a717d5/replies": {
+      "post": {
+        "tags": ["Tweets"],
+        "summary": "Reply tweet",
+        "description": "Reply a tweet by ID as logged in user",
+        "operationId": "Replytweet",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplytweetRequest"
+              },
+              "example": {
+                "message": "First reply on fake twitter"
+              }
+            }
+          },
+          "required": true,
+          "x-send-file-in-body": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {
+              "X-Powered-By": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Express"
+                  }
+                }
+              },
+              "Content-Length": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "257"
+                  }
+                }
+              },
+              "ETag": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "W/\"101-GVgLZtkkNo+JqN0DLt6J6+mFa/o\""
+                  }
+                }
+              },
+              "Date": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Fri, 14 Feb 2020 09:02:45 GMT"
+                  }
+                }
+              },
+              "Connection": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "keep-alive"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Posttweetsuccessfulresponse"
+                },
+                "example": {
+                  "code": 0,
+                  "message": "Operation Successful",
+                  "data": {
+                    "createdAt": "Fri Feb 14 2020 10:01:18 GMT+0100 (West Africa Standard Time)",
+                    "replies": [],
+                    "_id": "5e466235dd6fd23a88a717d5",
+                    "message": "First post on fake twitter",
+                    "userId": "5e45bc101a61c07bb1a2fa2a",
+                    "__v": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/tweets/search": {
+      "post": {
+        "tags": ["Tweets"],
+        "summary": "Search By Tweet",
+        "description": "Search for tweets that contain searchValue string",
+        "operationId": "SearchByTweet",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchByTweetRequest"
+              },
+              "example": {
+                "searchValue": "Seconds post on fake twitter"
+              }
+            }
+          },
+          "required": true,
+          "x-send-file-in-body": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {
+              "X-Powered-By": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Express"
+                  }
+                }
+              },
+              "Content-Length": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "1363"
+                  }
+                }
+              },
+              "ETag": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "W/\"553-To3BTem4YoAzayG6EUZ1pp319UE\""
+                  }
+                }
+              },
+              "Date": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "Sat, 15 Feb 2020 05:28:04 GMT"
+                  }
+                }
+              },
+              "Connection": {
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "keep-alive"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchByTweetsubstring"
+                },
+                "example": {
+                  "code": 0,
+                  "message": "Operation Successful",
+                  "data": [
+                    {
+                      "_id": "5e468ee1134a574946e65466",
+                      "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+                      "message": "Seconds post on fake twitter",
+                      "userId": "5e45b8d504ff3d718a7aa1dd"
+                    },
+                    {
+                      "_id": "5e468edf134a574946e65465",
+                      "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+                      "message": "Seconds post on fake twitter",
+                      "userId": "5e45b8d504ff3d718a7aa1dd"
+                    },
+                    {
+                      "_id": "5e468ecd134a574946e65464",
+                      "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+                      "message": "Seconds post on fake twitter",
+                      "userId": "5e45bc101a61c07bb1a2fa2a"
+                    },
+                    {
+                      "_id": "5e4680d2b2c4f41a8d03ed12",
+                      "createdAt": "Fri Feb 14 2020 12:11:43 GMT+0100 (West Africa Standard Time)",
+                      "message": "Seconds post on fake twitter",
+                      "userId": "5e45b8d504ff3d718a7aa1dd"
+                    },
+                    {
+                      "_id": "5e4680cab2c4f41a8d03ed11",
+                      "createdAt": "Fri Feb 14 2020 12:11:43 GMT+0100 (West Africa Standard Time)",
+                      "message": "First post on fake twitter",
+                      "userId": "5e45b8d504ff3d718a7aa1dd"
+                    },
+                    {
+                      "_id": "5e466720e0b91e4bc10236c0",
+                      "createdAt": "Fri Feb 14 2020 10:23:08 GMT+0100 (West Africa Standard Time)",
+                      "message": "First reply on fake twitter",
+                      "userId": "5e45bc101a61c07bb1a2fa2a"
+                    },
+                    {
+                      "_id": "5e466719e0b91e4bc10236bf",
+                      "createdAt": "Fri Feb 14 2020 10:23:08 GMT+0100 (West Africa Standard Time)",
+                      "message": "First post on fake twitter",
+                      "userId": "5e45bc101a61c07bb1a2fa2a"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/tweets/5e466719e0b91e4bc10236bf": {
+      "get": {
+        "tags": ["Tweets"],
+        "summary": "Get Tweet and Replies",
+        "description": "Get a tweet and replies to tweet",
+        "operationId": "GetTweetandReplies",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "application/json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegisterRequest": {
+        "title": "RegisterRequest",
+        "required": [
+          "username",
+          "phoneNumber",
+          "email",
+          "password",
+          "fullName"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "username": "blessing",
+          "phoneNumber": "07011111111",
+          "email": "bless@gmail.com",
+          "password": "Password12",
+          "fullName": "Blessing Ayala"
+        }
+      },
+      "Registeralreadyexixtingusername": {
+        "title": "Registeralreadyexixtingusername",
+        "required": ["code", "message"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "code": 10,
+          "message": "Username already taken"
+        }
+      },
+      "LoginRequest": {
+        "title": "LoginRequest",
+        "required": ["loginId", "password"],
+        "type": "object",
+        "properties": {
+          "loginId": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "loginId": "daniel",
+          "password": "Password12"
+        }
+      },
+      "Loginsuccess": {
+        "title": "Loginsuccess",
+        "required": ["code", "message", "data"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "code": 0,
+          "message": "Operation Successful",
+          "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlNDViOGQ1MDRmZjNkNzE4YTdhYTFkZCIsInVzZXJuYW1lIjoiZGFuaWVsIiwiaWF0IjoxNTgxNzQ0OTQ3LCJleHAiOjE1ODE3NDUyNDd9.2PvNqHpMawKbSmnlOeCHirVM22j7QrU3z75OGuaOZac"
+        }
+      },
+      "GetUserbyID": {
+        "title": "GetUserbyID",
+        "required": ["code", "message", "data"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Data"
+          }
+        },
+        "example": {
+          "code": 0,
+          "message": "Operation Successful",
+          "data": {
+            "_id": "5e45b8d504ff3d718a7aa1dd",
+            "followers": [
+              {
+                "_id": "5e45bc101a61c07bb1a2fa2a",
+                "fullName": "Blessing Ayala",
+                "username": "blessing"
+              }
+            ],
+            "following": [
+              {
+                "_id": "5e45bc101a61c07bb1a2fa2a",
+                "fullName": "Blessing Ayala",
+                "username": "blessing"
+              },
+              {
+                "_id": "5e45b8d504ff3d718a7aa1dd",
+                "fullName": "Daniel Ayala",
+                "username": "daniel"
+              }
+            ],
+            "fullName": "Daniel Ayala",
+            "username": "daniel",
+            "email": "dandaniels@gmail.com"
+          }
+        }
+      },
+      "Data": {
+        "title": "Data",
+        "required": [
+          "_id",
+          "followers",
+          "following",
+          "fullName",
+          "username",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "followers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Follower"
+            },
+            "description": ""
+          },
+          "following": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Following"
+            },
+            "description": ""
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "_id": "5e45b8d504ff3d718a7aa1dd",
+          "followers": [
+            {
+              "_id": "5e45bc101a61c07bb1a2fa2a",
+              "fullName": "Blessing Ayala",
+              "username": "blessing"
+            }
+          ],
+          "following": [
+            {
+              "_id": "5e45bc101a61c07bb1a2fa2a",
+              "fullName": "Blessing Ayala",
+              "username": "blessing"
+            },
+            {
+              "_id": "5e45b8d504ff3d718a7aa1dd",
+              "fullName": "Daniel Ayala",
+              "username": "daniel"
+            }
+          ],
+          "fullName": "Daniel Ayala",
+          "username": "daniel",
+          "email": "dandaniels@gmail.com"
+        }
+      },
+      "Follower": {
+        "title": "Follower",
+        "required": ["_id", "fullName", "username"],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "_id": "5e45bc101a61c07bb1a2fa2a",
+          "fullName": "Blessing Ayala",
+          "username": "blessing"
+        }
+      },
+      "Following": {
+        "title": "Following",
+        "required": ["_id", "fullName", "username"],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "_id": "5e45bc101a61c07bb1a2fa2a",
+          "fullName": "Blessing Ayala",
+          "username": "blessing"
+        }
+      },
+      "GetTimeline": {
+        "title": "GetTimeline",
+        "required": ["code", "message", "data"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Data1"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "code": 0,
+          "message": "Operation Successful",
+          "data": [
+            {
+              "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+              "replies": [],
+              "_id": "5e468ee1134a574946e65466",
+              "message": "Seconds post on fake twitter",
+              "userId": "5e45b8d504ff3d718a7aa1dd",
+              "__v": 0
+            },
+            {
+              "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+              "replies": [],
+              "_id": "5e468edf134a574946e65465",
+              "message": "Seconds post on fake twitter",
+              "userId": "5e45b8d504ff3d718a7aa1dd",
+              "__v": 0
+            },
+            {
+              "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+              "replies": [],
+              "_id": "5e468ecd134a574946e65464",
+              "message": "Seconds post on fake twitter",
+              "userId": "5e45bc101a61c07bb1a2fa2a",
+              "__v": 0
+            },
+            {
+              "createdAt": "Fri Feb 14 2020 12:11:43 GMT+0100 (West Africa Standard Time)",
+              "replies": [],
+              "_id": "5e4680d2b2c4f41a8d03ed12",
+              "message": "Seconds post on fake twitter",
+              "userId": "5e45b8d504ff3d718a7aa1dd",
+              "__v": 0
+            },
+            {
+              "createdAt": "Fri Feb 14 2020 12:11:43 GMT+0100 (West Africa Standard Time)",
+              "replies": [],
+              "_id": "5e4680cab2c4f41a8d03ed11",
+              "message": "First post on fake twitter",
+              "userId": "5e45b8d504ff3d718a7aa1dd",
+              "__v": 0
+            },
+            {
+              "createdAt": "Fri Feb 14 2020 10:23:08 GMT+0100 (West Africa Standard Time)",
+              "replies": [],
+              "_id": "5e466720e0b91e4bc10236c0",
+              "message": "First reply on fake twitter",
+              "userId": "5e45bc101a61c07bb1a2fa2a",
+              "__v": 0
+            },
+            {
+              "createdAt": "Fri Feb 14 2020 10:23:08 GMT+0100 (West Africa Standard Time)",
+              "replies": ["5e466720e0b91e4bc10236c0"],
+              "_id": "5e466719e0b91e4bc10236bf",
+              "message": "First post on fake twitter",
+              "userId": "5e45bc101a61c07bb1a2fa2a",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "Data1": {
+        "title": "Data1",
+        "required": ["createdAt", "replies", "_id", "message", "userId", "__v"],
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string"
+          },
+          "replies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": ""
+          },
+          "_id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "__v": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+          "replies": [],
+          "_id": "5e468ee1134a574946e65466",
+          "message": "Seconds post on fake twitter",
+          "userId": "5e45b8d504ff3d718a7aa1dd",
+          "__v": 0
+        }
+      },
+      "SearchByUsernameRequest": {
+        "title": "SearchByUsernameRequest",
+        "required": ["searchValue"],
+        "type": "object",
+        "properties": {
+          "searchValue": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "searchValue": "blessing"
+        }
+      },
+      "SearchByUsernamesubstring": {
+        "title": "SearchByUsernamesubstring",
+        "required": ["code", "message", "data"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Data2"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "code": 0,
+          "message": "Operation Successful",
+          "data": [
+            {
+              "_id": "5e45bc101a61c07bb1a2fa2a",
+              "fullName": "Blessing Ayala",
+              "username": "blessing"
+            },
+            {
+              "_id": "5e45b8d504ff3d718a7aa1dd",
+              "fullName": "Daniel Ayala",
+              "username": "daniel"
+            },
+            {
+              "_id": "5e434801ca495b1d43b65c51",
+              "username": "moses"
+            },
+            {
+              "_id": "5e42ff4446410c3fc993314b",
+              "username": "user1"
+            },
+            {
+              "_id": "5e42ff4446410c3fc993314c",
+              "username": "user2"
+            },
+            {
+              "_id": "5e42ff4446410c3fc993314d",
+              "username": "user3"
+            },
+            {
+              "_id": "5e42ff4446410c3fc993314e",
+              "username": "user4"
+            }
+          ]
+        }
+      },
+      "Data2": {
+        "title": "Data2",
+        "required": ["_id", "username"],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "_id": "5e45bc101a61c07bb1a2fa2a",
+          "fullName": "Blessing Ayala",
+          "username": "blessing"
+        }
+      },
+      "PosttweetRequest": {
+        "title": "PosttweetRequest",
+        "required": ["message"],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "message": "First post on fake twitter"
+        }
+      },
+      "Posttweetsuccessfulresponse": {
+        "title": "Posttweetsuccessfulresponse",
+        "required": ["code", "message", "data"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Data1"
+          }
+        },
+        "example": {
+          "code": 0,
+          "message": "Operation Successful",
+          "data": {
+            "createdAt": "Fri Feb 14 2020 10:01:18 GMT+0100 (West Africa Standard Time)",
+            "replies": [],
+            "_id": "5e466235dd6fd23a88a717d5",
+            "message": "First post on fake twitter",
+            "userId": "5e45bc101a61c07bb1a2fa2a",
+            "__v": 0
+          }
+        }
+      },
+      "ReplytweetRequest": {
+        "title": "ReplytweetRequest",
+        "required": ["message"],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "message": "First reply on fake twitter"
+        }
+      },
+      "SearchByTweetRequest": {
+        "title": "SearchByTweetRequest",
+        "required": ["searchValue"],
+        "type": "object",
+        "properties": {
+          "searchValue": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "searchValue": "Seconds post on fake twitter"
+        }
+      },
+      "SearchByTweetsubstring": {
+        "title": "SearchByTweetsubstring",
+        "required": ["code", "message", "data"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Data5"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "code": 0,
+          "message": "Operation Successful",
+          "data": [
+            {
+              "_id": "5e468ee1134a574946e65466",
+              "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+              "message": "Seconds post on fake twitter",
+              "userId": "5e45b8d504ff3d718a7aa1dd"
+            },
+            {
+              "_id": "5e468edf134a574946e65465",
+              "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+              "message": "Seconds post on fake twitter",
+              "userId": "5e45b8d504ff3d718a7aa1dd"
+            },
+            {
+              "_id": "5e468ecd134a574946e65464",
+              "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+              "message": "Seconds post on fake twitter",
+              "userId": "5e45bc101a61c07bb1a2fa2a"
+            },
+            {
+              "_id": "5e4680d2b2c4f41a8d03ed12",
+              "createdAt": "Fri Feb 14 2020 12:11:43 GMT+0100 (West Africa Standard Time)",
+              "message": "Seconds post on fake twitter",
+              "userId": "5e45b8d504ff3d718a7aa1dd"
+            },
+            {
+              "_id": "5e4680cab2c4f41a8d03ed11",
+              "createdAt": "Fri Feb 14 2020 12:11:43 GMT+0100 (West Africa Standard Time)",
+              "message": "First post on fake twitter",
+              "userId": "5e45b8d504ff3d718a7aa1dd"
+            },
+            {
+              "_id": "5e466720e0b91e4bc10236c0",
+              "createdAt": "Fri Feb 14 2020 10:23:08 GMT+0100 (West Africa Standard Time)",
+              "message": "First reply on fake twitter",
+              "userId": "5e45bc101a61c07bb1a2fa2a"
+            },
+            {
+              "_id": "5e466719e0b91e4bc10236bf",
+              "createdAt": "Fri Feb 14 2020 10:23:08 GMT+0100 (West Africa Standard Time)",
+              "message": "First post on fake twitter",
+              "userId": "5e45bc101a61c07bb1a2fa2a"
+            }
+          ]
+        }
+      },
+      "Data5": {
+        "title": "Data5",
+        "required": ["_id", "createdAt", "message", "userId"],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "_id": "5e468ee1134a574946e65466",
+          "createdAt": "Fri Feb 14 2020 13:11:31 GMT+0100 (West Africa Standard Time)",
+          "message": "Seconds post on fake twitter",
+          "userId": "5e45b8d504ff3d718a7aa1dd"
+        }
+      }
+    },
+    "securitySchemes": {
+      "httpBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "httpBearer": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Registration and authorization"
+    },
+    {
+      "name": "User",
+      "description": "User related routes\n"
+    },
+    {
+      "name": "Tweets",
+      "description": "All things related to tweets\n"
+    }
+  ]
+}
