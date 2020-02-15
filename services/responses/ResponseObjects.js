@@ -7,5 +7,6 @@ module.exports.message = {
 module.exports.code = {
   SUCCESS: 0,
   FAILURE: 10,
-  AUTH_FAILURE: 20
+  AUTH_FAILURE: 20,
+  VALIDATION_ERR: 30
 };

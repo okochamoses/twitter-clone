@@ -30,7 +30,7 @@ class UserRepository extends MongooseRepository {
     const users = await this.collection
       .find({ username: new RegExp(value, "i") })
       .lean()
-      .select("username fullname _id")
+      .select("username fullName _id")
       .exec();
     return users;
   }

@@ -1,9 +1,11 @@
 const router = require("express").Router();
+const { celebrate } = require("celebrate");
 const container = require("../config/DIContainer");
+const { validate } = require("./validation/index");
 
 const userService = container.cradle.userService;
 
-router.get("/", async function(req, res, next) {
+router.get("/", async (req, res, next) => {
   const { _id: userId } = req.user;
   res.json(await userService.getFollowers({ userId }));
 });
@@ -19,9 +21,13 @@ router.post("/follow/:userToFollowId", async (req, res, next) => {
   res.json(await userService.follow({ userToFollowId, userId }));
 });
 
-router.post("/search", async (req, res, next) => {
-  const { searchValue } = req.body;
-  res.json(await userService.search(searchValue));
-});
+router.post(
+  "/search",
+  celebrate(validate.user.search),
+  async (req, res, next) => {
+    const { searchValue } = req.body;
+    res.json(await userService.search(searchValue));
+  }
+);
 
 module.exports = router;

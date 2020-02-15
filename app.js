@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const passport = require("passport");
 require("dotenv").config();
+const errorHandler = require("./config/errorHandler");
 require("./config/database"); // Initialize connection to database
 require("./config/passport");
 
@@ -23,5 +24,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/users/", authMiddleware, userRouter);
 app.use("/api/auth/", authRouter);
 app.use("/api/tweets/", authMiddleware, tweetRouter);
+app.use(errorHandler);
 
 module.exports = app;

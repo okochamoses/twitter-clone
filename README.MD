@@ -80,6 +80,10 @@ A disadvantage of using this design lies in the fact that the following and foll
 Consisting of message, createdAt and replies. The replies list is a reference to other Tweets that are posted to reply to a tweet.
 Major reson for this was to provide quick query access to a Tweets replies.
 
+# Continous Integration
+
+I used circle CI as my continous integration tool
+
 # Other considerations and caveats
 
 - Ideally, I would have loved to use an in-memory database as a cache to manage some of the load on the database and increase speed of the app when it grows.

@@ -9,9 +9,10 @@ class TweetRepository extends MongooseRepository {
   async findRepliesByTweetId(id) {
     return this.collection
       .findById(id)
-      .select("message replies user")
-      .populate("user username")
-      .populate("Tweet", "message createdAt")
+      .select("message replies userId")
+      .populate("userId", "username")
+      .populate("replies", "message createdAt userId")
+      .lean()
       .exec();
   }
 

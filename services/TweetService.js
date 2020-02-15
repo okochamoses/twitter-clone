@@ -106,6 +106,21 @@ class TweetService {
       return new ServiceResponse(code.FAILURE, responseMessage.FAILURE);
     }
   }
+
+  async getTweet(tweetId) {
+    try {
+      const tweet = await this.tweetRepository.findRepliesByTweetId(tweetId);
+      if (tweet === null) {
+        return new ServiceResponse(code.FAILURE, "Tweet not found");
+      }
+      return new ServiceResponse(code.SUCCESS, responseMessage.SUCCESS, tweet);
+    } catch (e) {
+      logger.info(
+        `Error getting tweet search string with value of ${tweetId}: ${e.message}`
+      );
+      return new ServiceResponse(code.FAILURE, responseMessage.FAILURE);
+    }
+  }
 }
 
 module.exports = TweetService;
