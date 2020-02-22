@@ -6,8 +6,9 @@ const ServiceResponse = require("./responses/ServiceResponse");
 const logger = require("../config/logger");
 
 class TweetService {
-  constructor({ tweetRepository }) {
+  constructor({ tweetRepository, inMemoryDBService }) {
     this.tweetRepository = tweetRepository;
+    this.inMemoryDBService = inMemoryDBService;
   }
 
   async postTweet(message, userId) {
@@ -110,6 +111,7 @@ class TweetService {
   async getTweet(tweetId) {
     try {
       const tweet = await this.tweetRepository.findRepliesByTweetId(tweetId);
+      console.log(await this.inMemoryDBService.get("key"));
       if (tweet === null) {
         return new ServiceResponse(code.FAILURE, "Tweet not found");
       }
@@ -120,6 +122,13 @@ class TweetService {
       );
       return new ServiceResponse(code.FAILURE, responseMessage.FAILURE);
     }
+  }
+
+  // Update Timelines
+  // socket.io. broadcast million users
+  async updateFollowerTimelines() {
+    // check for logged in users
+    //
   }
 }
 

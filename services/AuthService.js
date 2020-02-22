@@ -4,9 +4,10 @@ const { jwtSecret, jwtTimeout } = require("../config/configurationKeys");
 const { code, message } = require("./responses/ResponseObjects");
 
 class AuthService {
-  constructor({ userRepository, encryptionService }) {
+  constructor({ userRepository, encryptionService, inMemoryDBService }) {
     this.userRepository = userRepository;
     this.encryptionService = encryptionService;
+    this.inMemoryDBService = inMemoryDBService;
   }
 
   async register(user) {
@@ -113,6 +114,7 @@ class AuthService {
           jwtSecret,
           { expiresIn: jwtTimeout }
         );
+        this.inMemoryDBService.setWithTimeout(user.id, user.username);
         return new ServiceResponse(code.SUCCESS, message.SUCCESS, signedToken);
       } else {
         return new ServiceResponse(
