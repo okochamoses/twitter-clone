@@ -1,16 +1,10 @@
 const redis = require("redis");
 const { redisUrl } = require("./configurationKeys");
 const client = redis.createClient({ url: redisUrl });
+const logger = require("./logger");
 
 client.on("error", function(error) {
-  console.error(error);
-});
-
-client.set("key", "value", redis.print);
-
-client.get("5e45b8d504ff3d718a7aa1dd", (err, reply) => {
-  if (err) console.log(err);
-  console.log(reply);
+  logger.error("REDIS ERROR: ", error.message);
 });
 
 module.exports = client;

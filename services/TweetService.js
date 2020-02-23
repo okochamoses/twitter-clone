@@ -6,9 +6,10 @@ const ServiceResponse = require("./responses/ServiceResponse");
 const logger = require("../config/logger");
 
 class TweetService {
-  constructor({ tweetRepository, inMemoryDBService }) {
+  constructor({ tweetRepository, inMemoryDBService, realTimeService }) {
     this.tweetRepository = tweetRepository;
     this.inMemoryDBService = inMemoryDBService;
+    this.realTimeService = realTimeService;
   }
 
   async postTweet(message, userId) {
@@ -17,6 +18,8 @@ class TweetService {
       if (tweet === null) {
         return new ServiceResponse(code.FAILURE, responseMessage.FAILURE);
       } else {
+        console.log(tweet);
+        this.realTimeService.updateFollowerTimelines(tweet.userId._id, tweet);
         return new ServiceResponse(
           code.SUCCESS,
           responseMessage.SUCCESS,
@@ -111,14 +114,13 @@ class TweetService {
   async getTweet(tweetId) {
     try {
       const tweet = await this.tweetRepository.findRepliesByTweetId(tweetId);
-      console.log(await this.inMemoryDBService.get("key"));
       if (tweet === null) {
         return new ServiceResponse(code.FAILURE, "Tweet not found");
       }
       return new ServiceResponse(code.SUCCESS, responseMessage.SUCCESS, tweet);
     } catch (e) {
       logger.info(
-        `Error getting tweet search string with value of ${tweetId}: ${e.message}`
+        `Error getting tweet search with ID of ${tweetId}: ${e.message}`
       );
       return new ServiceResponse(code.FAILURE, responseMessage.FAILURE);
     }
