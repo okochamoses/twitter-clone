@@ -80,6 +80,17 @@ A disadvantage of using this design lies in the fact that the following and foll
 Consisting of message, createdAt and replies. The replies list is a reference to other Tweets that are posted to reply to a tweet.
 Major reson for this was to provide quick query access to a Tweets replies.
 
+### Real time timeline updates
+
+For the realtime updates, I have decided to use socket.io to create a connection with the clients via web sockets, long polling etc, to broadcast any newly posted tweet to the users followers. The updates can be received on the client side by listening for the logged in user's userId for messages. The following snippet is an example of what can be done on the client side
+
+```var socket = io("http://localhost:3000");
+socket.on(userId, tweet => {
+    // Use tweet message in any way you'd like
+    alert(tweet.message);
+});
+```
+
 # Continous Integration
 
 I used circle CI as my continous integration tool
